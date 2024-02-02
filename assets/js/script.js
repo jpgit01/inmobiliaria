@@ -96,15 +96,45 @@ let elementoAlquiler = document.getElementById("alquiler");
 
 function actualizarVenta() {
     let contenidoTotal = ""
+    let contenidoLink = `
+    <a href="#" class="btn btn-dark">
+        Ver todas las propiedades en venta
+    </a>`
     let contenidoHtml =""
     for(let i = 0; i< propiedades_alquiler.length; i++){
-        // Se ejecuta 5 veces, con valores del paso 0 al 4.
+
+        const numero = propiedades_venta[i].costo;
+        let nuevoCosto =  numero.toLocaleString("de-DE", { style: "currency", currency: "EUR" })
+
+let smoke = `
+<p class="text-success">
+    <i class="fas fa-smoking"></i> Permitido fumar
+</p>`
+let pet = `
+<p class="text-success">
+    <i class="fas fa-paw"></i> Mascotas permitidas
+</p>`
+
+if(propiedades_venta[i].smoke == false){
+    smoke = `
+    <p class="text-danger">
+        <i class="fas fa-smoking-ban"></i> No se permite fumar
+    </p>`
+}
+
+if(propiedades_venta[i].pets == false){
+    pet = `
+    <p class="text-danger">
+        <i class="fas fa-ban"></i> No se permiten mascotas
+    </p>`
+}
+
         console.log(propiedades_venta[i].nombre);
     contenidoHtml +=`
     <div class="col-md-4 mb-4">
     <div class="card">
       <img
-        src="https://fotos.perfil.com/2018/09/21/trim/950/534/nueva-york-09212018-366965.jpg"
+        src="${propiedades_venta[i].src}"
         class="card-img-top"
         alt="Imagen del departamento"
       />
@@ -113,30 +143,25 @@ function actualizarVenta() {
           ${propiedades_venta[i].nombre}
         </h5>
         <p class="card-text">
-          Este apartamento de lujo está ubicado en una exclusiva zona
-          residencial
+        ${propiedades_venta[i].descripcion}
         </p>
         <p>
-          <i class="fas fa-map-marker-alt"></i> 123 Luxury Lane,
-          Prestige Suburb, CA 45678
+          <i class="fas fa-map-marker-alt"></i>
+          ${propiedades_venta[i].ubicacion}
         </p>
         <p>
-          <i class="fas fa-bed"></i> 4 Habitaciones |
-          <i class="fas fa-bath"></i> 4 Baños
+          <i class="fas fa-bed"></i> ${propiedades_venta[i].habitaciones} Habitaciones |
+          <i class="fas fa-bath"></i> ${propiedades_venta[i].baños} Baños
         </p>
-        <p><i class="fas fa-dollar-sign"></i> 5.000</p>
-        <p class="text-danger">
-          <i class="fas fa-smoking-ban"></i> No se permite fumar
-        </p>
-        <p class="text-danger">
-          <i class="fa-solid fa-ban"></i> No se permiten mascotas
-        </p>
+        <p><i class="fas fa-dollar-sign"></i> ${nuevoCosto}</p>
+        ${smoke}
+        ${pet}
       </div>
     </div>
   </div>
     `
  }
-      contenidoTotal = "<div class=row>" + contenidoHtml + "</div>"
+      contenidoTotal = "<div class=row>" + contenidoHtml + "</div>" + contenidoLink
       elementoVenta.innerHTML = contenidoTotal;
 }
 
@@ -146,5 +171,6 @@ function actualizarAlquiler() {
 
 window.onload = function() {
     actualizarVenta();
-    actualizarAlquiler()
 };
+
+let URLactual = window.location;
