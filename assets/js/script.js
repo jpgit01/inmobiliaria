@@ -91,3 +91,19 @@ const propiedades_venta = [
     pets: true
     }
 ]
+
+let elementoVenta = document.getElementById("venta");
+let elementoAlquiler = document.getElementById("alquiler");
+
+function actualizarVenta() {
+    elementoVenta.innerHTML = "<p>Hola <strong>desde Venta</strong>!</p>";
+}
+
+function actualizarAlquiler() {
+    elementoAlquiler.innerHTML = "<p>Hola <strong>desde Alquiler</strong>!</p>";
+}
+
+window.onload = function() {
+    actualizarVenta();
+    actualizarAlquiler()
+};
