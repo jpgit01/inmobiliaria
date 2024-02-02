@@ -94,17 +94,21 @@ const propiedades_venta = [
 let elementoVenta = document.getElementById("venta");
 let elementoAlquiler = document.getElementById("alquiler");
 
-function actualizarVenta() {
+function actualizarVenta(cantidadMostrar) {
+    let cantidadPropiedades = propiedades_venta.length
     let contenidoTotal = ""
     let contenidoLink = `
     <a href="#" class="btn btn-dark">
         Ver todas las propiedades en venta
     </a>`
     let contenidoHtml =""
-    for(let i = 0; i< propiedades_alquiler.length; i++){
+    for(let i = 0; i< cantidadPropiedades; i++){
 
         const numero = propiedades_venta[i].costo;
-        let nuevoCosto =  numero.toLocaleString("de-DE", { style: "currency", currency: "EUR" })
+        let nuevoCosto =  numero.toLocaleString(undefined, { 
+            minimumFractionDigits: 3,
+            maximumFractionDigits: 10,
+         })
 
 let smoke = `
 <p class="text-success">
@@ -129,7 +133,6 @@ if(propiedades_venta[i].pets == false){
     </p>`
 }
 
-        console.log(propiedades_venta[i].nombre);
     contenidoHtml +=`
     <div class="col-md-4 mb-4">
     <div class="card">
@@ -165,12 +168,13 @@ if(propiedades_venta[i].pets == false){
       elementoVenta.innerHTML = contenidoTotal;
 }
 
-function actualizarAlquiler() {
-    elementoAlquiler.innerHTML = "<p>Hola <strong>desde Alquiler</strong>!</p>";
-}
+
+
+
 
 window.onload = function() {
     actualizarVenta();
 };
 
 let URLactual = window.location;
+console.log(URLactual)
