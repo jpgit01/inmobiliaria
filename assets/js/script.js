@@ -1,3 +1,5 @@
+
+//objetos con sus contenidos------------------------------------------------------------------------------------------------------
 const propiedades_venta = [
     {
     nombre: 'Apartamento de lujo en zona exclusiva',
@@ -42,7 +44,29 @@ const propiedades_venta = [
     costo: 4.500,
     smoke: false,
     pets: true
-    }
+    },
+    {
+      nombre: 'Penthouse de lujo con terraza panorámica',
+      src: 'https://resizer.glanacion.com/resizer/fhK-tSVag_8UGJjPMgWrspslPoU=/768x0/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/CUXVMXQE4JD5XIXX4X3PDZAVMY.jpg',
+      descripcion: 'Este penthouse de lujo ofrece una terraza panorámica con vistas espectaculares',
+      ubicacion: '567 Skyline Avenue, Skyview City, CA 56789',
+      habitaciones: 3,
+      baños: 3,
+      costo: 4.500,
+      smoke: false,
+      pets: true
+      },
+      {
+        nombre: 'Penthouse de lujo con terraza panorámica',
+        src: 'https://resizer.glanacion.com/resizer/fhK-tSVag_8UGJjPMgWrspslPoU=/768x0/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/CUXVMXQE4JD5XIXX4X3PDZAVMY.jpg',
+        descripcion: 'Este penthouse de lujo ofrece una terraza panorámica con vistas espectaculares',
+        ubicacion: '567 Skyline Avenue, Skyview City, CA 56789',
+        habitaciones: 3,
+        baños: 3,
+        costo: 4.500,
+        smoke: false,
+        pets: true
+        }
 ]
 const propiedades_alquiler = [
     {
@@ -88,33 +112,81 @@ const propiedades_alquiler = [
     costo: 2.200,
     smoke: false,
     pets: false
-    }
+    },
+    {
+      nombre: 'Condominio moderno en zona residencial',
+      src: 'https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvbmRvfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60',
+      descripcion: 'Este elegante condominio moderno está ubicado en una tranquila zona residencial',
+      ubicacion: '123 Main Street, Anytown, CA 91234',
+      habitaciones: 2,
+      baños: 2,
+      costo: 2.200,
+      smoke: false,
+      pets: false
+      },
+      {
+        nombre: 'Condominio moderno en zona residencial',
+        src: 'https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvbmRvfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60',
+        descripcion: 'Este elegante condominio moderno está ubicado en una tranquila zona residencial',
+        ubicacion: '123 Main Street, Anytown, CA 91234',
+        habitaciones: 2,
+        baños: 2,
+        costo: 2.200,
+        smoke: false,
+        pets: false
+        },
+        {
+          nombre: 'Condominio moderno en zona residencial',
+          src: 'https://images.unsplash.com/photo-1567496898669-ee935f5f647a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvbmRvfGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60',
+          descripcion: 'Este elegante condominio moderno está ubicado en una tranquila zona residencial',
+          ubicacion: '123 Main Street, Anytown, CA 91234',
+          habitaciones: 2,
+          baños: 2,
+          costo: 2.200,
+          smoke: false,
+          pets: false
+          }
+    
 ]
 
-
+//obtener id-----------------------------------------------------------------------------------------------------------------------
 let elementoVenta = document.getElementById("venta");
 let elementoAlquiler = document.getElementById("alquiler");
 
+
+//funcion ventas------------------------------------------------------------------------------------------------------------------
 function actualizarVenta() {
+
+  //para reconocer la url index y colocar en index.html solamente 3 propiedades y quitar en otras paginas el boton ver todas las propiedades----------
     let URLactual = window.location.href;
-    let value = propiedades_venta.length
+    let value = propiedades_venta.length;
+    let contenidoLink = ""
     if(URLactual.substr(-10) == "index.html"){
-        value = 3
-    }
-    let contenidoTotalVenta = ""
-    let contenidoLink = `
-    <a href="#" class="btn btn-dark">
+        value = 3;
+        contenidoLink = `
+    <a href="propiedades_venta.html" class="btn btn-dark">
         Ver todas las propiedades en venta
     </a>`
+    }
+
+  //variables para armar lo que se va a insertar al id al final-----------
+    let contenidoTotalVenta = ""
+
+
+    
     let contenidoHtml =""
+
+    //ciclo que arma cards---------------------
     for(let i = 0; i< value ; i++){
 
+      //para los valores en moneda y solucionar problemas de ceros a la derecha-----------------
         const numero = propiedades_venta[i].costo;
         let nuevoCosto =  numero.toLocaleString(undefined, { 
             minimumFractionDigits: 3,
             maximumFractionDigits: 10,
          })
 
+//Para true o false de fumar y mascotas------------       
 let smoke = `
 <p class="text-success">
     <i class="fas fa-smoking"></i> Permitido fumar
@@ -123,14 +195,12 @@ let pet = `
 <p class="text-success">
     <i class="fas fa-paw"></i> Mascotas permitidas
 </p>`
-
 if(propiedades_venta[i].smoke == false){
     smoke = `
     <p class="text-danger">
         <i class="fas fa-smoking-ban"></i> No se permite fumar
     </p>`
 }
-
 if(propiedades_venta[i].pets == false){
     pet = `
     <p class="text-danger">
@@ -169,22 +239,28 @@ if(propiedades_venta[i].pets == false){
   </div>
     `
  }
+ // armado de la variable que se inserta en el id------------------------------
       contenidoTotalVenta = "<h2>Propiedades en venta</h2><div class=row>" + contenidoHtml + "</div>" + contenidoLink
       elementoVenta.innerHTML = contenidoTotalVenta;
 }
 
+
+
+// funcion alquiler-----mismos pasos que la funcion venta-----------------------------------------------------------------------------
 function actualizarAlquiler() {
     let URLactual = window.location.href;
     let value = propiedades_alquiler.length
+    let contenidoLink = ""
     if(URLactual.substr(-10) == "index.html"){
-        value = 3
+        value = 3;
+        contenidoLink = `
+    <a href="propiedades_alquiler.html" class="btn btn-dark">
+        Ver todas las propiedades en alquiler
+    </a>`
     }
 
     let contenidoTotalAlquiler = ""
-    let contenidoLink = `
-    <a href="#" class="btn btn-dark">
-        Ver todas las propiedades en alquiler
-    </a>`
+
     let contenidoHtml =""
     for(let i = 0; i< value ; i++){
 
